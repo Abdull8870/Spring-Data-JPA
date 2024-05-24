@@ -7,7 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DataJpaApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(DataJpaApplication.class, args);
+
+		System.out.println("Hello from Ab's branch");
 	}
 
 }
