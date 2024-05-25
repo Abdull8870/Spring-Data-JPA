@@ -1,7 +1,9 @@
 package com.SpringDataJPA.DataJPA;
 
 import com.SpringDataJPA.DataJPA.models.Author;
+import com.SpringDataJPA.DataJPA.models.Video;
 import com.SpringDataJPA.DataJPA.repositories.AuthorRepository;
+import com.SpringDataJPA.DataJPA.repositories.VideoRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,14 +20,14 @@ public class DataJpaApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(AuthorRepository authorRepository){
+	public CommandLineRunner commandLineRunner(
+			VideoRepository repo){
 		return args -> {
-			var author= Author.builder().
-					firstName("Virat").
-					lastName("Kohli").
-					age(35).email("virat@Ipl.com").build();
 
-			authorRepository.save(author);
+			var video= Video.builder().
+					name("New Video").length(5).build();
+
+			repo.save(video);
 
 		};
 	}
