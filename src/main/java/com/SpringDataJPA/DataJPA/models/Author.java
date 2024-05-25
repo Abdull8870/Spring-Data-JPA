@@ -2,47 +2,20 @@ package com.SpringDataJPA.DataJPA.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 @Data
-//@Table(name = "AUTHOR_TABLE")
-public class Author {
+@EqualsAndHashCode(callSuper = true)
+public class Author extends BaseEntity{
 
 
-
-    /*(
-            strategy = GenerationType.SEQUENCE,
-            generator = "author_id_gen"
-    )
-
-   */
-/*    @TableGenerator(
-             name="author_id_gen",
-            table = "id_generator",
-            pkColumnName = "id_name",
-            valueColumnName = "id_value",
-            allocationSize = 1
-            )
-
- */
-
-  /*  @SequenceGenerator(
-            name="author_sequence",
-            sequenceName ="author_sequence",
-            allocationSize = 1
-    )
-
-   */
-  @Id
-  @GeneratedValue
-    private Integer id;
-
-    @Column(
-            name="f_name"
-    )
     private String firstName;
 
     private String lastName;
@@ -54,15 +27,10 @@ public class Author {
 
     private int age;
 
-    @Column(
-            updatable = false,
-            nullable = false
+    @ManyToMany(
+            mappedBy = "authors"
     )
-    private LocalDateTime createdAt;
+    private List<Course> course;
 
-    @Column(
-            insertable = false
-    )
-    private LocalDateTime lastModified;
 
 }
