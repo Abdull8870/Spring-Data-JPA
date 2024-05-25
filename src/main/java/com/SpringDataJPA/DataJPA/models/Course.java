@@ -2,10 +2,8 @@ package com.SpringDataJPA.DataJPA.models;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -13,12 +11,10 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Data
-@Builder
-public class Course {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
+public class Course extends BaseEntity{
 
-    @Id
-    @GeneratedValue
-    private Integer id;
 
     private String name;
 

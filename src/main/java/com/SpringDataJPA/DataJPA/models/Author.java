@@ -2,6 +2,7 @@ package com.SpringDataJPA.DataJPA.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,17 +10,12 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Data
-public class Author {
+@EqualsAndHashCode(callSuper = true)
+public class Author extends BaseEntity{
 
-  @Id
-  @GeneratedValue
-    private Integer id;
 
-    @Column(
-            name="f_name"
-    )
     private String firstName;
 
     private String lastName;

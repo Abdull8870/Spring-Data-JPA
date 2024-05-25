@@ -2,21 +2,16 @@ package com.SpringDataJPA.DataJPA.models;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Resource {
-
-    @Id
-    @GeneratedValue
-    private Integer id;
+@EqualsAndHashCode(callSuper = true)
+public class Resource extends BaseEntity{
 
     private String name;
 

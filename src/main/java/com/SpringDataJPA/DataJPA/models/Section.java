@@ -2,24 +2,19 @@ package com.SpringDataJPA.DataJPA.models;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.repository.cdi.Eager;
 
 import java.util.List;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Section {
-
-    @Id
-    @GeneratedValue
-    private Integer id;
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
+public class Section extends BaseEntity{
 
     private String name;
 
