@@ -15,7 +15,7 @@ import org.hibernate.annotations.AnyKeyJavaClass;
 @SuperBuilder
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@DiscriminatorValue("TextFile")
+//@DiscriminatorValue("TextFile")
 public class Text extends Resource {
 
     private String content;
