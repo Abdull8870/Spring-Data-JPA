@@ -1,6 +1,7 @@
 package com.SpringDataJPA.DataJPA.security;
 
 import com.SpringDataJPA.DataJPA.security.filter.AuthenticationFilter;
+import com.SpringDataJPA.DataJPA.security.filter.ExceptionFilter;
 import com.SpringDataJPA.DataJPA.security.filter.JWTAuthorizationFilter;
 import com.SpringDataJPA.DataJPA.security.securityManager.CustomAuthenticationManager;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ System.out.println("Inside");
                 req.requestMatchers(HttpMethod.GET,"user/users").permitAll().
                         requestMatchers(HttpMethod.POST,"user/register").
                         permitAll().anyRequest().authenticated()).
+                addFilterBefore(new ExceptionFilter(),AuthenticationFilter.class).
                 addFilter(authenticationFilter).
                 addFilterAfter(new JWTAuthorizationFilter(),AuthenticationFilter.class).
                 sessionManagement((session)->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
