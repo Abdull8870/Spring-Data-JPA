@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -21,29 +22,10 @@ public class DataJpaApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(
-			AuthorRepository repo){
-		return args -> {
-
-//			Faker fake=new Faker();
-//			for(int i=0;i<50;i++){
-//				var autho=Author.builder().
-//						firstName(fake.name().firstName()).
-//						lastName(fake.name().lastName()).
-//						email(fake.name().firstName()+i+"@email.com").
-//						age(fake.number().numberBetween(20,80)).build();
-//				repo.save(autho);
-//			}
-
-			List<Author> allAuthorsByAge = repo.getAllAuthorsByAge(20);
-
-			for(Author auth:allAuthorsByAge){
-				System.out.println(auth.getFirstName()+" "+auth.getAge());
-
-			}
-
-		};
+	public BCryptPasswordEncoder bCryptPasswordEncoder(){
+		return new BCryptPasswordEncoder();
 	}
+
 
 
 
