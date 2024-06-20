@@ -18,7 +18,7 @@ public class User {
     private Integer id;
 
     @NotNull
-    private String userName;
+    private String username;
 
     @NotNull
     private String password;

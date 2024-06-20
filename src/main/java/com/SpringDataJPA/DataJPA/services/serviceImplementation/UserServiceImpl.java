@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User findUserByUsername(String username){
-        Optional<User> user=this.userRepository.findByUserName(username);
+        Optional<User> user=this.userRepository.findByUsername(username);
         return unWrapUser(user);
     }
 
