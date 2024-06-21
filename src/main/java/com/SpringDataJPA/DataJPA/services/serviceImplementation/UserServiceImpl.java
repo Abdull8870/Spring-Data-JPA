@@ -1,14 +1,16 @@
 package com.SpringDataJPA.DataJPA.services.serviceImplementation;
 
+import com.SpringDataJPA.DataJPA.dto.UserDto;
 import com.SpringDataJPA.DataJPA.entity.User;
+import com.SpringDataJPA.DataJPA.exception.EntityNotFoundException;
 import com.SpringDataJPA.DataJPA.repositories.UserRepository;
 import com.SpringDataJPA.DataJPA.services.UserService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 
 @AllArgsConstructor
 @Service
@@ -18,9 +20,16 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public User registerUser(User user) {
+    public UserDto registerUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        User savedUser= userRepository.save(user);
+        UserDto userDto=UserDto.builder().
+                firstName(savedUser.getFirstName()).
+                lastName(savedUser.getLastName()).
+                username(savedUser.getUsername()).
+                id(savedUser.getId()).build();
+        return userDto;
+
     }
 
     @Override
@@ -38,13 +47,26 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public User findUserByUsername(String username){
-        Optional<User> user=this.userRepository.findByUsername(username);
-        return unWrapUser(user);
+    @Override
+    public UserDto getUser(Long id) {
+        Optional<User> userById = userRepository.findById(id);
+        User user= unWrapUser(userById,String.valueOf(id));
+        UserDto userDto=UserDto.builder().
+                username(user.getUsername()).
+                firstName(user.getFirstName()).
+                lastName(user.getLastName()).
+                id(user.getId()).build();
+
+        return userDto;
     }
 
-    static User unWrapUser(Optional<User> user){
+    public User findUserByUsername(String username){
+        Optional<User> user=this.userRepository.findByUsername(username);
+        return unWrapUser(user,username);
+    }
+
+    static User unWrapUser(Optional<User> user,String res){
         if(user.isPresent()) return user.get();
-        else throw new EntityNotFoundException("User Not Found");
+        else throw new EntityNotFoundException(res,User.class);
     }
 }

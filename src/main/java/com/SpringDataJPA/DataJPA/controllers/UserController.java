@@ -1,5 +1,6 @@
 package com.SpringDataJPA.DataJPA.controllers;
 
+import com.SpringDataJPA.DataJPA.dto.UserDto;
 import com.SpringDataJPA.DataJPA.entity.User;
 import com.SpringDataJPA.DataJPA.services.serviceImplementation.UserServiceImpl;
 import lombok.AllArgsConstructor;
@@ -15,14 +16,19 @@ public class UserController {
     private UserServiceImpl userService;
 
     @PostMapping("register")
-    public ResponseEntity<User> registerUser(@RequestBody User user){
-        User saveUser =this.userService.registerUser(user);
+    public ResponseEntity<UserDto> registerUser(@RequestBody User user){
+        UserDto saveUser =this.userService.registerUser(user);
         return new ResponseEntity<>(saveUser,HttpStatus.OK);
     }
 
-    @GetMapping("users")
-    public ResponseEntity<String> getUser(){
+    @GetMapping("all-users")
+    public ResponseEntity<String> getAllUser(){
         return new ResponseEntity<>("Abdul Rahuman",HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUser(@PathVariable Long id){
+        return new ResponseEntity<>(userService.getUser(id),HttpStatus.OK);
     }
 
     @GetMapping("authenticate/check")
