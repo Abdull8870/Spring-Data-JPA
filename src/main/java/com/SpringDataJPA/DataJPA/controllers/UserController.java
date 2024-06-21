@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/user")
@@ -22,8 +24,8 @@ public class UserController {
     }
 
     @GetMapping("all-users")
-    public ResponseEntity<String> getAllUser(){
-        return new ResponseEntity<>("Abdul Rahuman",HttpStatus.OK);
+    public ResponseEntity<List<UserDto>> getAllUser(){
+        return new ResponseEntity<>(userService.getAllUsers(),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

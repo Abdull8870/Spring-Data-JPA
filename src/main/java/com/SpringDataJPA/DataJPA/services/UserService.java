@@ -3,6 +3,8 @@ package com.SpringDataJPA.DataJPA.services;
 import com.SpringDataJPA.DataJPA.dto.UserDto;
 import com.SpringDataJPA.DataJPA.entity.User;
 
+import java.util.List;
+
 
 public interface UserService {
 
@@ -15,6 +17,8 @@ public interface UserService {
     void removeUser(String username);
 
     UserDto getUser(Long id);
+
+    List<UserDto> getAllUsers();
 
 
 }

@@ -9,7 +9,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
@@ -30,6 +32,19 @@ public class UserServiceImpl implements UserService {
                 id(savedUser.getId()).build();
         return userDto;
 
+    }
+
+    public List<UserDto> getAllUsers(){
+
+       List<UserDto> users=userRepository.findAll().stream().map(user->UserDto.
+                builder().
+                id(user.getId()).
+                firstName(user.getFirstName()).
+                lastName(user.getLastName()).
+                username(user.getUsername()).
+                build()).collect(Collectors.toList());
+
+        return users;
     }
 
     @Override
