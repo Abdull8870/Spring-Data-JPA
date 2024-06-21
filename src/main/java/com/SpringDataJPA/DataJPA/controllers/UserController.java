@@ -3,6 +3,7 @@ package com.SpringDataJPA.DataJPA.controllers;
 import com.SpringDataJPA.DataJPA.dto.UserDto;
 import com.SpringDataJPA.DataJPA.entity.User;
 import com.SpringDataJPA.DataJPA.services.serviceImplementation.UserServiceImpl;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class UserController {
     private UserServiceImpl userService;
 
     @PostMapping("register")
-    public ResponseEntity<UserDto> registerUser(@RequestBody User user){
+    public ResponseEntity<UserDto> registerUser(@RequestBody @Valid User user){
         UserDto saveUser =this.userService.registerUser(user);
         return new ResponseEntity<>(saveUser,HttpStatus.OK);
     }
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUser(@PathVariable Long id){
+    public ResponseEntity<UserDto> getUser(@PathVariable @Valid Long id){
         return new ResponseEntity<>(userService.getUser(id),HttpStatus.OK);
     }
 

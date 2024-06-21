@@ -25,6 +25,7 @@ public class User {
 
     private String firstName;
 
+    @NotNull(message = "Last Name Cannot be Null")
     private String lastName;
 
     private int age;
