@@ -9,13 +9,8 @@ import java.util.List;
 public class ErrorResponse {
 
     private LocalDateTime timeStamp;
-    private String message;
     private List<String> messages;
 
-    public ErrorResponse(String msg){
-        this.message=msg;
-        this.timeStamp=LocalDateTime.now();
-    }
 
     public ErrorResponse(List<String> msg){
         this.messages=msg;

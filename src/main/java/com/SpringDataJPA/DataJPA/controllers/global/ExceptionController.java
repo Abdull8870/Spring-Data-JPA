@@ -18,7 +18,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({EntityNotFoundException.class})
     public ResponseEntity<ErrorResponse> handleResourseNotFoundException(Exception ex){
-        ErrorResponse errorResponse=new ErrorResponse(ex.getMessage());
+        ErrorResponse errorResponse=new ErrorResponse(Arrays.asList(ex.getMessage()));
         return new ResponseEntity<>(errorResponse,HttpStatus.NOT_FOUND);
     }
 
