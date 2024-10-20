@@ -1,7 +1,7 @@
 package com.SpringDataJPA.DataJPA.security.filter;
 
+import com.SpringDataJPA.DataJPA.exception.EntityNotFoundException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

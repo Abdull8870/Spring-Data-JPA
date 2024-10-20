@@ -24,10 +24,10 @@ public class SecurityConfig {
 
 
         AuthenticationFilter authenticationFilter=new AuthenticationFilter(customAuthenticationManager);
+
         authenticationFilter.setFilterProcessesUrl("/user/authenticate");
-System.out.println("Inside");
         http.csrf((csrf)->csrf.disable()).authorizeHttpRequests((req)->
-                req.requestMatchers(HttpMethod.GET,"user/users").permitAll().
+                req.requestMatchers(HttpMethod.GET,"user/users/**").permitAll().
                         requestMatchers(HttpMethod.POST,"user/register").
                         permitAll().anyRequest().authenticated()).
                 addFilterBefore(new ExceptionFilter(),AuthenticationFilter.class).
