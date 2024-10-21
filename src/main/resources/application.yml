@@ -9,3 +9,11 @@ spring:
       ddl-auto: create-drop
     database: postgresql
     show-sql: true
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    packages:
+      trust-all: true
+server:
+  port: 8081
